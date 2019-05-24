@@ -19,7 +19,7 @@ module.exports = function (app) {
       changeOrigin: true,
       secure,
     }),
-    proxy('/api-token-auth', {
+    proxy('/media', {
       target: 'http://127.0.0.1:8000/',
       changeOrigin: true,
       secure,
