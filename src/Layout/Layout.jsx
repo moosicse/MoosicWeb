@@ -3,18 +3,14 @@ import {Layout} from 'antd';
 import AppSider from './Sider';
 
 import './style/Layout.less';
-import AppHeader from './Header';
 import AppRouter from '../Router/Router';
 
-const {
-  Content, Footer,
-} = Layout;
+const {Content, Footer} = Layout;
 
 class AppLayout extends React.Component {
   render() {
     return (
       <Layout className="app-layout">
-        {/*<AppHeader/>*/}
         <Layout>
           <Content className="content">
             <div className="content-div">
@@ -23,9 +19,9 @@ class AppLayout extends React.Component {
           </Content>
           <AppSider className="sider"/>
         </Layout>
-        {/*<Footer className="footer">*/}
-          {/*Ant Design ©2018 Created by Ant UED*/}
-        {/*</Footer>*/}
+        <Footer className="footer">
+          Moosic
+        </Footer>
       </Layout>
     );
   }

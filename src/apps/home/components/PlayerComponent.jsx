@@ -1,5 +1,6 @@
 import React from 'react';
-import {Col, Row, Divider} from 'antd';
+import * as ReactDOM from 'react-dom';
+import {Col, Row, Divider, Button} from 'antd';
 import {observer} from 'mobx-react';
 import Audio from 'react-audioplayer';
 
@@ -12,6 +13,13 @@ import '../style/Player.less';
 class PlayerComponent extends React.Component {
   componentWillMount = () => {
     MusicPlayerStore.fetchLuckySong();
+  };
+
+  refreshLucky = () => {
+    MusicPlayerStore.fetchLuckySong(this)
+      .then(() => {
+        ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-skip-to-next'));
+      });
   };
 
   render() {
@@ -29,6 +37,7 @@ class PlayerComponent extends React.Component {
                 autoPlay={false}
                 fullPlayer={true}
                 playlist={MusicPlayerStore.currentPlayList}
+                ref={audioComponent => { this.audioComponent = audioComponent; }}
               />
             }
           </div>
@@ -38,7 +47,9 @@ class PlayerComponent extends React.Component {
           <Col className='music-info' lg={24}>
             <h1 className='music-player-title'>{currentPlayList[0].name}</h1>
             <Divider />
-            歌手：{currentPlayList[0].singer} | 专辑：{currentPlayList[0].album}
+            歌手：{currentPlayList[0].singer} |
+            专辑：{currentPlayList[0].album} |
+            <Button size='small' onClick={this.refreshLucky}>刷新</Button>
           </Col>
         }
       </Row>
