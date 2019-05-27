@@ -14,7 +14,7 @@ class AppLayout extends React.Component {
   render() {
     return (
       <Layout className="app-layout">
-        <AppHeader/>
+        {/*<AppHeader/>*/}
         <Layout>
           <Content className="content">
             <div className="content-div">
@@ -23,9 +23,9 @@ class AppLayout extends React.Component {
           </Content>
           <AppSider className="sider"/>
         </Layout>
-        <Footer className="footer">
-          Ant Design ©2018 Created by Ant UED
-        </Footer>
+        {/*<Footer className="footer">*/}
+          {/*Ant Design ©2018 Created by Ant UED*/}
+        {/*</Footer>*/}
       </Layout>
     );
   }

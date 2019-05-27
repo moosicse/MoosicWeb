@@ -15,6 +15,7 @@
     "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-app-rewired": "^2.1.1",
+    "react-audioplayer": "^0.3.1",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8"

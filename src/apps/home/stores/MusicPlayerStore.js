@@ -4,13 +4,23 @@ import FetchProvider from '../../../shared/RequestProvider';
 
 class MusicPlayerStore{
   @observable loading = true;
-  @observable currentSong = {};
+  @observable currentPlayList = [];
+
+  resolveList = (li) => {
+    const res = [];
+    for (const i of li) {
+      i.src = i.file;
+      i.img = i.cover;
+      res.push(i)
+    }
+    return res;
+  };
 
   @action fetchLuckySong = () => {
     this.loading = false;
     return FetchProvider.get('/api/song/lucky/')
       .then(res => {
-        this.currentSong = res.data;
+        this.currentPlayList = this.resolveList(res.data);
         this.loading = true;
       })
   }
