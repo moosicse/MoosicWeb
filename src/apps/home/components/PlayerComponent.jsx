@@ -1,5 +1,4 @@
 import React from 'react';
-import * as ReactDOM from 'react-dom';
 import {Col, Row, Divider, Button} from 'antd';
 import {observer} from 'mobx-react';
 import Audio from 'react-audioplayer';
@@ -7,6 +6,7 @@ import Audio from 'react-audioplayer';
 import MusicPlayerStore from '../stores/MusicPlayerStore';
 
 import '../style/Player.less';
+import MusicPlayerControllerStore from '../stores/MusicPlayerControllerStore';
 
 
 @observer
@@ -18,7 +18,7 @@ class PlayerComponent extends React.Component {
   refreshLucky = () => {
     MusicPlayerStore.fetchLuckySong(this)
       .then(() => {
-        ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-skip-to-next'));
+        MusicPlayerControllerStore.nextSong();
       });
   };
 
@@ -37,7 +37,7 @@ class PlayerComponent extends React.Component {
                 autoPlay={false}
                 fullPlayer={true}
                 playlist={MusicPlayerStore.currentPlayList}
-                ref={audioComponent => { this.audioComponent = audioComponent; }}
+                ref={audioComponent => { MusicPlayerControllerStore.audioComponent = audioComponent; }}
               />
             }
           </div>
