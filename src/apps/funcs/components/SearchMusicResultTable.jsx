@@ -13,19 +13,19 @@ const columns = [
   },
   {
     title: '歌手',
-    width: 150,
+    width: 100,
     dataIndex: 'singer',
     key: 'singer',
   },
   {
-    title: '专辑名',
-    width: 150,
+    title: '专辑',
+    width: 100,
     dataIndex: 'album',
     key: 'album',
   },
   {
     title: '流派',
-    width: 300,
+    width: 200,
     key: 'tags',
     dataIndex: 'tags',
   },

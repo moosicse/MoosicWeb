@@ -1,5 +1,5 @@
 import React from 'react';
-import {Drawer, Button, Input} from 'antd';
+import {Drawer, Input} from 'antd';
 import {observer} from 'mobx-react';
 import SearchMusicStore from '../stores/SearchMusicStore';
 import SearchMusicResultTable from './SearchMusicResultTable';
@@ -23,7 +23,7 @@ class SearchMusicDrawer extends React.Component {
           visible={SearchMusicStore.visible}
         >
           <Search
-            placeholder="输入搜索词"
+            placeholder="歌名/歌手名"
             onSearch={value => SearchMusicStore.searchMusic(value)}
             enterButton
           />
