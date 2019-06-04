@@ -38,7 +38,7 @@ const columns = [
           播放
         </Tag>
         <Divider type="vertical"/>
-        <a href="javascript:;">Delete</a>
+        <a href="#">添加到歌单</a>
       </span>
     ),
   },
