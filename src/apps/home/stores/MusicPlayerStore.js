@@ -1,8 +1,9 @@
 import {observable, action} from 'mobx';
 import FetchProvider from '../../../shared/RequestProvider';
+import MusicPlayerControllerStore from './MusicPlayerControllerStore';
 
 
-class MusicPlayerStore{
+class MusicPlayerStore {
   @observable loading = true;
   @observable currentPlayList = [];
 
@@ -23,6 +24,18 @@ class MusicPlayerStore{
         this.currentPlayList = this.resolveList(res.data);
         this.loading = true;
       })
+  };
+
+  @action playSpecificSong = (song) => {
+    MusicPlayerControllerStore.pause();
+    this.currentPlayList = this.resolveList([song]);
+    setTimeout(() => {
+      MusicPlayerControllerStore.nextSong();
+    }, 500);
+    setTimeout(() => {
+      MusicPlayerControllerStore.play();
+    }, 800);
+
   }
 }
 

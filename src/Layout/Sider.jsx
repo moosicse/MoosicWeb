@@ -5,6 +5,8 @@ import {observer} from 'mobx-react';
 
 import './style/Sider.less';
 import AuthStore from '../apps/auth/stores/AuthStore';
+import UserInfoComponent from '../apps/funcs/components/UserInfoComponent';
+import SearchMusicStore from '../apps/funcs/stores/SearchMusicStore';
 
 
 const {Sider} = Layout;
@@ -57,6 +59,7 @@ class AppSider extends React.Component {
         className="sider"
       >
         <div className="logo"/>
+        <UserInfoComponent/>
         <Menu
           theme="dark" mode="inline"
           selectedKeys={[this.getSelectKey()]} defaultOpenKeys={['admin']}
@@ -64,20 +67,16 @@ class AppSider extends React.Component {
           <Menu.Item key="/home">
             <NavLink to="/home">
               <Icon type="user"/>
-              <span className="home-text">主页</span>
+              <span className="home-text">播放器</span>
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="/info">
-            <NavLink to="/info">
-              <Icon type="info"/>
-              <span className="home-text">修改信息</span>
-            </NavLink>
+          <Menu.Item key="/info" onClick={SearchMusicStore.open}>
+            <Icon type="info"/>
+            <span className="home-text">搜索歌曲</span>
           </Menu.Item>
           <Menu.Item key="/reservation">
-            <NavLink to="/reservation">
-              <Icon type="bank"/>
-              <span className="home-text">活动室预约</span>
-            </NavLink>
+            <Icon type="bank"/>
+            <span className="home-text">我的歌单</span>
           </Menu.Item>
           {
             AuthStore.profile.is_staff &&

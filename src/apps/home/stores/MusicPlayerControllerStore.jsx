@@ -8,7 +8,25 @@ class MusicPlayerControllerStore {
     if(this.audioComponent) {
       ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-skip-to-next'));
     }
-  }
+  };
+
+  @action previousSong = () => {
+    if(this.audioComponent) {
+      ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-skip-to-previous'));
+    }
+  };
+
+  @action play = () => {
+    if(this.audioComponent) {
+      ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-play'));
+    }
+  };
+
+  @action pause = () => {
+    if(this.audioComponent) {
+      ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-pause'));
+    }
+  };
 }
 
 export default new MusicPlayerControllerStore();

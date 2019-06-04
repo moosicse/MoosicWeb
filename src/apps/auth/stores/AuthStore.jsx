@@ -2,15 +2,12 @@ import {observable, action} from 'mobx';
 import {message} from 'antd';
 import FetchProvider from '../../../shared/RequestProvider';
 
-const defaultProfile = {
-  auth: false,
-  user: null,
-  major: null,
-  dormitary: null,
-};
+const defaultProfile = {};
 
 class AuthStore {
   @observable loading = true;
+
+  @observable auth = false;
 
   constructor() {
     this.fetchMyUserProfile();
@@ -23,10 +20,9 @@ class AuthStore {
     FetchProvider.get('/api/account/profile/')
       .then(res => {
         this.profile = res.data;
-        this.profile.name = this.profile.user.username;
-        this.profile.email = this.profile.user.email;
+        this.auth = true;
         this.loading = false;
-        message.success(`欢迎回来，${this.profile.name}`);
+        message.success(`欢迎回来，${this.profile.user.username}`);
       })
       .catch(res => {
         console.log(res);
@@ -40,10 +36,9 @@ class AuthStore {
       username, password
     }).then(res => {
       this.profile = res.data;
-      this.profile.name = this.profile.user.username;
-      this.profile.email = this.profile.user.email;
+      this.auth = true;
       this.loading = false;
-      message.success(`登录成功，${this.profile.name}`);
+      message.success(`登录成功，${this.profile.user.username}`);
     }).catch(res => {
       this.loading = false;
       message.error('学号或密码错误');
