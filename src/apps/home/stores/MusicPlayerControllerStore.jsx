@@ -2,7 +2,15 @@ import {observable, action} from 'mobx';
 import ReactDOM from 'react-dom';
 
 class MusicPlayerControllerStore {
-  @observable audioComponent = null;
+  audioComponent = null;
+  @observable position = 0;
+
+  @action rollCheckPosition = () => {
+    setTimeout(this.rollCheckPosition, 1000);
+    if (this.audioComponent){
+      this.position = this.audioComponent.state.currentPlaylistPos;
+    }
+  };
 
   @action nextSong = () => {
     if(this.audioComponent) {

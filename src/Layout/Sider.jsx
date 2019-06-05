@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink, withRouter} from 'react-router-dom';
-import {Layout, Menu, Icon, Button, Popover} from 'antd';
+import {Layout, Menu, Icon, Popover} from 'antd';
 import {observer} from 'mobx-react';
 
 import AuthStore from '../apps/auth/stores/AuthStore';

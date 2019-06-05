@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Row, Divider, Button} from 'antd';
+import {Col, Row, Divider, Tag} from 'antd';
 import {observer} from 'mobx-react';
 import Audio from 'react-audioplayer';
 
@@ -15,6 +15,7 @@ import AlbumStore from '../../funcs/stores/AlbumStore';
 class PlayerComponent extends React.Component {
   componentWillMount = () => {
     MusicPlayerStore.fetchLuckySong();
+    MusicPlayerControllerStore.rollCheckPosition();
   };
 
   refreshLucky = () => {
@@ -26,6 +27,7 @@ class PlayerComponent extends React.Component {
 
   render() {
     const {currentPlayList} = MusicPlayerStore;
+    const {position} = MusicPlayerControllerStore;
 
     return (
       <Row className='music-player'>
@@ -45,13 +47,15 @@ class PlayerComponent extends React.Component {
           </div>
         </Col>
         {
-          currentPlayList[0] &&
+          currentPlayList[position] &&
           <Col className='music-info' lg={24}>
-            <h1 className='music-player-title'>{currentPlayList[0].name}</h1>
+            <h1 className='music-player-title'>{currentPlayList[position].name}</h1>
             <Divider />
-            歌手：{currentPlayList[0] && SingerStore.getSingerLink(currentPlayList[0].singer)} |
-            专辑：{currentPlayList[0] && AlbumStore.getAlbumLink(currentPlayList[0].album)} |
-            <Button size='small' onClick={this.refreshLucky}>刷新</Button>
+            歌手：{currentPlayList[position] && SingerStore.getSingerLink(currentPlayList[position].singer)}
+            <Divider type='vertical'/>
+            专辑：{currentPlayList[position] && AlbumStore.getAlbumLink(currentPlayList[position].album)}
+            <Divider type='vertical'/>
+            <Tag color='blue' onClick={this.refreshLucky}>Lucky</Tag>
           </Col>
         }
       </Row>

@@ -7,6 +7,7 @@ import MusicPlayerControllerStore from './MusicPlayerControllerStore';
 class MusicPlayerStore {
   @observable loading = true;
   @observable currentPlayList = [];
+  @observable currentSong = this.currentPlayList[MusicPlayerControllerStore.position];
 
   resolveList = (li) => {
     const res = [];
