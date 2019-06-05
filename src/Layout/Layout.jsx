@@ -6,6 +6,7 @@ import './style/Layout.less';
 import AppRouter from '../Router/Router';
 import SearchMusicDrawer from '../apps/funcs/components/SearchMusicDrawer';
 import SingerDrawer from '../apps/funcs/components/SingerDrawer';
+import AlbumDrawer from '../apps/funcs/components/AlbumDrawer';
 
 const {Content, Footer} = Layout;
 
@@ -21,6 +22,7 @@ class AppLayout extends React.Component {
             <div className='drawers'>
               <SearchMusicDrawer/>
               <SingerDrawer/>
+              <AlbumDrawer/>
             </div>
           </Content>
           <AppSider className="sider"/>

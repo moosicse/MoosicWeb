@@ -4,11 +4,13 @@ import {observer} from 'mobx-react';
 import MusicPlayerStore from '../../home/stores/MusicPlayerStore';
 import SingerStore from '../stores/SingerStore';
 
+import '../styles/MusicResultTable.less';
+import AlbumStore from '../stores/AlbumStore';
+
 const columns = [{
   title: '歌名',
-  width: 150,
+  width: 180,
   dataIndex: 'name',
-  key: 'name',
 }, {
   title: '歌手',
   width: 100,
@@ -19,18 +21,21 @@ const columns = [{
 }, {
   title: '专辑',
   width: 100,
-  dataIndex: 'album',
-  key: 'album',
+  render: song => {
+    const {album} = song;
+    return AlbumStore.getAlbumLink(album);
+  }
 }, {
   title: '流派',
-  width: 200,
+  width: 100,
   key: 'tags',
   dataIndex: 'tags',
 }, {
   title: '操作',
   key: 'action',
-  render: song => {return (
-    <span>
+  render: song => {
+    return (
+      <span>
       <Tag color='green' key='play' onClick={() => {
         MusicPlayerStore.playSpecificSong(song)
       }}>
@@ -39,7 +44,8 @@ const columns = [{
       <Divider type="vertical"/>
       <a href="#">添加到歌单</a>
     </span>
-  )},
+    )
+  },
 }];
 
 

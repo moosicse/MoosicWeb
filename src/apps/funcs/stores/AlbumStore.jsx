@@ -2,7 +2,7 @@ import {action, observable} from 'mobx';
 import FetchProvider from '../../../shared/RequestProvider';
 import React from 'react';
 
-class SingerStore {
+class AlbumStore {
   @observable visible = false;
   @observable loading = false;
 
@@ -20,36 +20,36 @@ class SingerStore {
     this.visible = false;
   };
 
-  @action showSinger = (singer_id) => {
+  @action showAlbum = (album_id) => {
     this.open();
-    this.fetchSinger(singer_id);
-    this.fetchSingerSong(singer_id);
+    this.fetchAlbum(album_id);
+    this.fetchAlbumSong(album_id);
   };
 
-  @action fetchSingerSong = (singer_id) => {
+  @action fetchAlbumSong = (album_id) => {
     this.loading = true;
-    return FetchProvider.get(`/api/singer/${singer_id}/songs/`)
+    return FetchProvider.get(`/api/album/${album_id}/songs/`)
       .then(res => {
         this.singerSongs = res.data;
         this.loading = false;
       })
   };
 
-  @action fetchSinger = (singer_id) => {
+  @action fetchAlbum = (album_id) => {
     this.loading = true;
-    return FetchProvider.get(`/api/singer/${singer_id}/`)
+    return FetchProvider.get(`/api/album/${album_id}/`)
       .then(res => {
         this.singerInfo = res.data;
         this.loading = false;
       })
   };
 
-  @action getSingerLink = (singer) => {
-    if (singer){
-      return (<a href="#" onClick={() => this.showSinger(singer.id)}>{singer.name}</a>)
+  @action getAlbumLink = (album) => {
+    if (album){
+      return (<a href="#" onClick={() => this.showAlbum(album.id)}>{album.name}</a>)
     }
     return <p>暂无信息</p>
   };
 }
 
-export default new SingerStore();
+export default new AlbumStore();
