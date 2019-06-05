@@ -46,9 +46,9 @@ class SingerStore {
 
   @action getSingerLink = (singer) => {
     if (singer){
-      return (<a onClick={() => this.showArtist(singer.id)}>{singer.name}</a>)
+      return (<a href='#' onClick={() => this.showArtist(singer.id)}>{singer.name}</a>)
     }
-    return <a>暂无信息</a>
+    return <p>暂无信息</p>
   };
 }
 
