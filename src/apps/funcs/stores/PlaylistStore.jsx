@@ -1,6 +1,6 @@
+import {message} from 'antd';
 import {action, observable} from 'mobx';
 import FetchProvider from '../../../shared/RequestProvider';
-import React from 'react';
 
 class AlbumStore {
   @observable visible = false;
@@ -45,6 +45,24 @@ class AlbumStore {
     this.loading = true;
     return FetchProvider.delete(`/api/playlist/${playlist_id}/`)
       .then(res => {
+        this.fetchPlaylist();
+      });
+  };
+
+  @action addSong = (playlist_id, song) => {
+    this.loading = true;
+    return FetchProvider.post(`/api/playlist/${playlist_id}/add_song/`, {song})
+      .then(res => {
+        message.success('添加成功');
+        this.fetchPlaylist();
+      });
+  };
+
+  @action removeSong = (playlist_id, song) => {
+    this.loading = true;
+    return FetchProvider.post(`/api/playlist/${playlist_id}/remove_song/`, {song})
+      .then(res => {
+        message.success('删除成功');
         this.fetchPlaylist();
       });
   };

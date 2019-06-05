@@ -3,16 +3,14 @@ import {NavLink, withRouter} from 'react-router-dom';
 import {Layout, Menu, Icon, Button, Popover} from 'antd';
 import {observer} from 'mobx-react';
 
-import './style/Sider.less';
 import AuthStore from '../apps/auth/stores/AuthStore';
 import UserInfoComponent from '../apps/funcs/components/UserInfoComponent';
 import SearchMusicStore from '../apps/funcs/stores/SearchMusicStore';
 import PlaylistStore from '../apps/funcs/stores/PlaylistStore';
-import SongListComponent from '../apps/funcs/components/SongListComponent';
 import MusicPlayerStore from '../apps/home/stores/MusicPlayerStore';
+import CurrentSongListComponent from '../apps/funcs/components/CurrentSongListComponent';
 
-
-const {Sider} = Layout;
+import './style/Sider.less';
 
 
 @observer
@@ -53,7 +51,7 @@ class AppSider extends React.Component {
 
   render() {
     return (
-      <Sider
+      <Layout.Sider
         breakpoint="lg"
         collapsedWidth="0"
         trigger={null}
@@ -77,7 +75,7 @@ class AppSider extends React.Component {
             <Icon type="info"/>
             <span className="home-text">搜索歌曲</span>
           </Menu.Item>
-          <Menu.Item key="/playlist" onClick={PlaylistStore.showPlaylist}>
+          <Menu.Item key="/playlist" onClick={PlaylistStore.open}>
             <Icon type="bank"/>
             <span className="home-text">我的歌单</span>
           </Menu.Item>
@@ -85,7 +83,7 @@ class AppSider extends React.Component {
             <Icon type="bank"/>
             <Popover
               content={
-                <SongListComponent dataSource={MusicPlayerStore.currentPlayList}/>
+                <CurrentSongListComponent dataSource={MusicPlayerStore.currentPlayList}/>
               }
               title='当前播放列表'
               placement="left"
@@ -98,7 +96,7 @@ class AppSider extends React.Component {
             this.getAdminMenu()
           }
         </Menu>
-      </Sider>
+      </Layout.Sider>
     );
   }
 }

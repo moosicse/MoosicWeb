@@ -2,11 +2,11 @@ import React from 'react';
 import {Divider, Table, Tag} from 'antd';
 import {observer} from 'mobx-react';
 
-import '../styles/MusicResultTable.less';
-import AlbumStore from '../stores/AlbumStore';
 import SongListPopover from './SongListPopover';
 import PlaylistStore from '../stores/PlaylistStore';
 import MusicPlayerStore from '../../home/stores/MusicPlayerStore';
+
+import '../styles/MusicResultTable.less';
 
 const columns = [{
   title: '歌单名',
@@ -16,11 +16,10 @@ const columns = [{
   title: '歌曲列表',
   width: 130,
   render: playlist => {
-    const {songs} = playlist;
     return (
       <SongListPopover
         buttonLabel='歌单歌曲'
-        dataSource={songs}
+        playlist={playlist}
         loading={PlaylistStore.loading}
       />
     )

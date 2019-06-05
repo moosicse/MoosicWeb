@@ -10,12 +10,12 @@ import SongListComponent from './SongListComponent';
 @observer
 class SongListPopover extends React.Component {
   render() {
-    const {buttonLabel, dataSource} = this.props;
+    const {buttonLabel, playlist} = this.props;
 
     return (
       <Popover
         content={
-          <SongListComponent dataSource={dataSource}/>
+          <SongListComponent playlist={playlist}/>
         }
         title={buttonLabel}
         placement="left"

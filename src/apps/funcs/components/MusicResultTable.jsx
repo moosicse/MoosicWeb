@@ -1,11 +1,12 @@
 import React from 'react';
-import {Divider, Table, Tag} from 'antd';
+import {Button, Divider, List, Popover, Table, Tag} from 'antd';
 import {observer} from 'mobx-react';
 import MusicPlayerStore from '../../home/stores/MusicPlayerStore';
 import SingerStore from '../stores/SingerStore';
 
 import '../styles/MusicResultTable.less';
 import AlbumStore from '../stores/AlbumStore';
+import PlaylistStore from '../stores/PlaylistStore';
 
 const columns = [{
   title: '歌名',
@@ -42,11 +43,22 @@ const columns = [{
         播放
       </Tag>
       <Divider type="vertical"/>
-      <Tag color='blue' key='add' onClick={() => {
-        MusicPlayerStore.playSpecificSong(song)
-      }}>
-        添加到歌单
-      </Tag>
+      <Popover content={
+        <List
+          dataSource={PlaylistStore.playlists}
+          renderItem={item => {
+            return (
+              <List.Item>
+                <a href="#" onClick={() => PlaylistStore.addSong(item.id, song.id)}>{item.name}</a>
+              </List.Item>
+            );
+          }}
+        />
+      } title="Title">
+        <Tag color='blue' key='add'>
+          添加到歌单
+        </Tag>
+      </Popover>
     </span>
     )
   },

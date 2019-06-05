@@ -11,7 +11,7 @@ class CreatePlaylistPopover extends React.Component {
       <Popover content={
         <Input.Search placeholder="歌单名字" onSearch={
           value => PlaylistStore.createPlaylist(value)
-        } enterButton />
+        } enterButton="确定" />
       } title="创建歌单">
       <Button type="primary">新建</Button>
   </Popover>

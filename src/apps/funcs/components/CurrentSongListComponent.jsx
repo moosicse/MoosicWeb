@@ -7,21 +7,18 @@ import {observer} from 'mobx-react';
 
 
 @observer
-class SongListComponent extends React.Component {
+class CurrentSongListComponent extends React.Component {
   render() {
-    const {playlist} = this.props;
+    const {dataSource} = this.props;
     return (
       <List
         loading={PlaylistStore.loading}
         itemLayout="horizontal"
-        dataSource={playlist.songs}
+        dataSource={dataSource}
         renderItem={song => (
           <List.Item actions={[
             SingerStore.getSingerLink(song.singer),
             AlbumStore.getAlbumLink(song.album),
-            <Tag color='red' key='remove' onClick={() => PlaylistStore.removeSong(playlist.id, song.id)}>
-              删除
-            </Tag>,
           ]}>
             <List.Item.Meta title={song.name} />
           </List.Item>
@@ -31,4 +28,4 @@ class SongListComponent extends React.Component {
   }
 }
 
-export default SongListComponent;
+export default CurrentSongListComponent;
