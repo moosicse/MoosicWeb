@@ -42,7 +42,11 @@ const columns = [{
         播放
       </Tag>
       <Divider type="vertical"/>
-      <a href="#">添加到歌单</a>
+      <Tag color='blue' key='add' onClick={() => {
+        MusicPlayerStore.playSpecificSong(song)
+      }}>
+        添加到歌单
+      </Tag>
     </span>
     )
   },

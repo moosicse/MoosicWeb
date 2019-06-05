@@ -1,3 +1,4 @@
+import {message} from 'antd';
 import {observable, action} from 'mobx';
 import FetchProvider from '../../../shared/RequestProvider';
 import MusicPlayerControllerStore from './MusicPlayerControllerStore';
@@ -15,6 +16,21 @@ class MusicPlayerStore {
       res.push(i)
     }
     return res;
+  };
+
+  @action loadPlaylist = (playlist) => {
+    if (playlist && playlist.length === 0){
+      message.warning('歌单中无歌曲');
+      return
+    }
+    MusicPlayerControllerStore.pause();
+    this.currentPlayList = this.resolveList(playlist);
+    setTimeout(() => {
+      MusicPlayerControllerStore.nextSong();
+    }, 150);
+    setTimeout(() => {
+      MusicPlayerControllerStore.play();
+    }, 300);
   };
 
   @action fetchLuckySong = () => {
@@ -35,7 +51,6 @@ class MusicPlayerStore {
     setTimeout(() => {
       MusicPlayerControllerStore.play();
     }, 800);
-
   }
 }
 

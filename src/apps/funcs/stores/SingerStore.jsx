@@ -48,7 +48,7 @@ class SingerStore {
     if (singer){
       return (<a href="#" onClick={() => this.showSinger(singer.id)}>{singer.name}</a>)
     }
-    return <p>暂无信息</p>
+    return <a>暂无信息</a>
   };
 }
 

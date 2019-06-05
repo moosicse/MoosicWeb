@@ -48,7 +48,7 @@ class AlbumStore {
     if (album){
       return (<a href="#" onClick={() => this.showAlbum(album.id)}>{album.name}</a>)
     }
-    return <p>暂无信息</p>
+    return <a>暂无信息</a>
   };
 }
 

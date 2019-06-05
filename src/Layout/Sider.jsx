@@ -1,12 +1,15 @@
 import React from 'react';
 import {NavLink, withRouter} from 'react-router-dom';
-import {Layout, Menu, Icon} from 'antd';
+import {Layout, Menu, Icon, Button, Popover} from 'antd';
 import {observer} from 'mobx-react';
 
 import './style/Sider.less';
 import AuthStore from '../apps/auth/stores/AuthStore';
 import UserInfoComponent from '../apps/funcs/components/UserInfoComponent';
 import SearchMusicStore from '../apps/funcs/stores/SearchMusicStore';
+import PlaylistStore from '../apps/funcs/stores/PlaylistStore';
+import SongListComponent from '../apps/funcs/components/SongListComponent';
+import MusicPlayerStore from '../apps/home/stores/MusicPlayerStore';
 
 
 const {Sider} = Layout;
@@ -70,13 +73,25 @@ class AppSider extends React.Component {
               <span className="home-text">播放器</span>
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="/info" onClick={SearchMusicStore.open}>
+          <Menu.Item key="/search" onClick={SearchMusicStore.open}>
             <Icon type="info"/>
             <span className="home-text">搜索歌曲</span>
           </Menu.Item>
-          <Menu.Item key="/reservation">
+          <Menu.Item key="/playlist" onClick={PlaylistStore.showPlaylist}>
             <Icon type="bank"/>
             <span className="home-text">我的歌单</span>
+          </Menu.Item>
+          <Menu.Item key="/current-playlist">
+            <Icon type="bank"/>
+            <Popover
+              content={
+                <SongListComponent dataSource={MusicPlayerStore.currentPlayList}/>
+              }
+              title='当前播放列表'
+              placement="left"
+            >
+              <span className="home-text">当前播放列表</span>
+            </Popover>
           </Menu.Item>
           {
             AuthStore.profile.is_staff &&
