@@ -7,6 +7,7 @@ import MusicPlayerStore from '../stores/MusicPlayerStore';
 
 import '../style/Player.less';
 import MusicPlayerControllerStore from '../stores/MusicPlayerControllerStore';
+import SingerStore from '../../funcs/stores/SingerStore';
 
 
 @observer
@@ -47,8 +48,8 @@ class PlayerComponent extends React.Component {
           <Col className='music-info' lg={24}>
             <h1 className='music-player-title'>{currentPlayList[0].name}</h1>
             <Divider />
-            歌手：{currentPlayList[0].singer} |
-            专辑：{currentPlayList[0].album} |
+            歌手：{currentPlayList[0] && SingerStore.getSingerLink(currentPlayList[0].singer)} |
+            专辑：{currentPlayList[0] && currentPlayList[0].album ? currentPlayList[0].album.name : '暂无信息'} |
             <Button size='small' onClick={this.refreshLucky}>刷新</Button>
           </Col>
         }

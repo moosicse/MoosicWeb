@@ -8,7 +8,7 @@ class HomeContainer extends React.Component {
   render() {
     return (
       <Row className="home" gutter={20}>
-        <Col sm={{span: 18, push: 3}}>
+        <Col sm={{span: 20, push: 2}}>
           <PlayerComponent />
         </Col>
       </Row>

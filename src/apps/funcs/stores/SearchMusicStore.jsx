@@ -8,7 +8,10 @@ class SearchMusicStore {
   @observable searchResult = [];
 
   @action open = () => {
-    this.visible = true;
+    this.close();
+    setTimeout(() => {
+      this.visible = true;
+    }, 10);
   };
 
   @action close = () => {
