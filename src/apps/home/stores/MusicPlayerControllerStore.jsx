@@ -12,6 +12,12 @@ class MusicPlayerControllerStore {
     }
   };
 
+  @action reset = () => {
+    if (this.audioComponent){
+      this.audioComponent.state.currentPlaylistPos = 0;
+    }
+  };
+
   @action nextSong = () => {
     if(this.audioComponent) {
       ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-skip-to-next'));

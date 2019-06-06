@@ -67,20 +67,20 @@ class AppSider extends React.Component {
         >
           <Menu.Item key="/home">
             <NavLink to="/home">
-              <Icon type="user"/>
+              <Icon type="play-circle"/>
               <span className="home-text">播放器</span>
             </NavLink>
           </Menu.Item>
           <Menu.Item key="/search" onClick={SearchMusicStore.open}>
-            <Icon type="info"/>
+            <Icon type="search"/>
             <span className="home-text">搜索歌曲</span>
           </Menu.Item>
           <Menu.Item key="/playlist" onClick={PlaylistStore.open}>
-            <Icon type="bank"/>
+            <Icon type="menu"/>
             <span className="home-text">我的歌单</span>
           </Menu.Item>
           <Menu.Item key="/current-playlist">
-            <Icon type="bank"/>
+            <Icon type="menu-unfold"/>
             <Popover
               content={
                 <CurrentSongListComponent dataSource={MusicPlayerStore.currentPlayList}/>

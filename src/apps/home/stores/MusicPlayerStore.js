@@ -26,12 +26,7 @@ class MusicPlayerStore {
     }
     MusicPlayerControllerStore.pause();
     this.currentPlayList = this.resolveList(playlist);
-    setTimeout(() => {
-      MusicPlayerControllerStore.nextSong();
-    }, 150);
-    setTimeout(() => {
-      MusicPlayerControllerStore.play();
-    }, 300);
+    this.startNewSong();
   };
 
   @action fetchLuckySong = () => {
@@ -46,12 +41,19 @@ class MusicPlayerStore {
   @action playSpecificSong = (song) => {
     MusicPlayerControllerStore.pause();
     this.currentPlayList = this.resolveList([song]);
+    this.startNewSong();
+  };
+
+  @action startNewSong = () => {
     setTimeout(() => {
       MusicPlayerControllerStore.nextSong();
-    }, 500);
+    }, 100);
+    setTimeout(() => {
+      MusicPlayerControllerStore.previousSong();
+    }, 110);
     setTimeout(() => {
       MusicPlayerControllerStore.play();
-    }, 800);
+    }, 200);
   }
 }
 

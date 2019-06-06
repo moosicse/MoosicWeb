@@ -37,7 +37,7 @@ class PlayerComponent extends React.Component {
               currentPlayList[0] && document.getElementsByClassName("music-player")[0] &&
               <Audio
                 width={document.getElementsByClassName("music-player")[0].offsetWidth}
-                height={500}
+                height={630}
                 autoPlay={false}
                 fullPlayer={true}
                 playlist={MusicPlayerStore.currentPlayList}
@@ -49,8 +49,8 @@ class PlayerComponent extends React.Component {
         {
           currentPlayList[position] &&
           <Col className='music-info' lg={24}>
-            <h1 className='music-player-title'>{currentPlayList[position].name}</h1>
-            <Divider />
+            <span className='music-player-title'>{currentPlayList[position] && currentPlayList[position].name}</span>
+            <Divider type='vertical'/>
             歌手：{currentPlayList[position] && SingerStore.getSingerLink(currentPlayList[position].singer)}
             <Divider type='vertical'/>
             专辑：{currentPlayList[position] && AlbumStore.getAlbumLink(currentPlayList[position].album)}

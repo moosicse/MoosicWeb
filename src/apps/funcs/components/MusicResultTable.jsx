@@ -7,6 +7,7 @@ import SingerStore from '../stores/SingerStore';
 import '../styles/MusicResultTable.less';
 import AlbumStore from '../stores/AlbumStore';
 import PlaylistStore from '../stores/PlaylistStore';
+import MusicResultTablePopover from './MusicResultTablePopover';
 
 const columns = [{
   title: '歌名',
@@ -27,11 +28,11 @@ const columns = [{
     return AlbumStore.getAlbumLink(album);
   }
 }, {
-  title: '流派',
-  width: 100,
-  key: 'tags',
-  dataIndex: 'tags',
-}, {
+//   title: '流派',
+//   width: 100,
+//   key: 'tags',
+//   dataIndex: 'tags',
+// }, {
   title: '操作',
   key: 'action',
   render: song => {
@@ -44,17 +45,8 @@ const columns = [{
       </Tag>
       <Divider type="vertical"/>
       <Popover content={
-        <List
-          dataSource={PlaylistStore.playlists}
-          renderItem={item => {
-            return (
-              <List.Item>
-                <a href="#" onClick={() => PlaylistStore.addSong(item.id, song.id)}>{item.name}</a>
-              </List.Item>
-            );
-          }}
-        />
-      } title="Title">
+        <MusicResultTablePopover song={song}/>
+      } title="选择歌单">
         <Tag color='blue' key='add'>
           添加到歌单
         </Tag>
