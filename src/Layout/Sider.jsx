@@ -11,6 +11,7 @@ import MusicPlayerStore from '../apps/home/stores/MusicPlayerStore';
 import CurrentSongListComponent from '../apps/funcs/components/CurrentSongListComponent';
 
 import './style/Sider.less';
+import MotionPlaylistComponent from '../apps/motion/components/MotionPlaylistComponent';
 
 
 @observer
@@ -91,6 +92,18 @@ class AppSider extends React.Component {
               <span className="home-text">当前播放列表</span>
             </Popover>
           </Menu.Item>
+          <Menu.Item key="/motion-recommendation">
+          <Icon type="smile"/>
+          <Popover
+            content={
+              <MotionPlaylistComponent/>
+            }
+            title='选择你的心情'
+            placement="left"
+          >
+            <span className="home-text">心情歌单</span>
+          </Popover>
+        </Menu.Item>
           {
             AuthStore.profile.is_staff &&
             this.getAdminMenu()
