@@ -1,5 +1,6 @@
 import React from 'react';
 import {observer} from 'mobx-react';
+import {withRouter} from 'react-router-dom';
 import AuthStore from '../../auth/stores/AuthStore';
 
 import '../styles/SiderUserInfo.less';
@@ -11,7 +12,9 @@ class UserInfoComponent extends React.Component {
     if (AuthStore.auth) {
       return (
         <div className='sider-user-info'>
-          <p>欢迎，{AuthStore.profile.user.username}</p>
+          <p>欢迎，{AuthStore.profile.user.username} <span onClick={() => {
+            AuthStore.logout().then(() => {this.props.history.push('/home')});
+          }}>注销</span></p>
         </div>
       );
     }
@@ -23,4 +26,4 @@ class UserInfoComponent extends React.Component {
   }
 }
 
-export default UserInfoComponent;
+export default withRouter(UserInfoComponent);

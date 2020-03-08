@@ -1,6 +1,6 @@
 import React from 'react';
 import {observer} from 'mobx-react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link, Redirect, withRouter} from 'react-router-dom';
 import {
   Form, Icon, Input, Button, Checkbox,
 } from 'antd';
@@ -14,6 +14,9 @@ class UnwrappedLoginForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         AuthStore.login(values.username, values.password)
+          .then(() => {
+            this.props.history.push('/home');
+          });
       }
     });
   };
@@ -65,4 +68,4 @@ class UnwrappedLoginForm extends React.Component {
 }
 
 const AppLoginForm = Form.create({name: 'normal_login'})(UnwrappedLoginForm);
-export default AppLoginForm;
+export default withRouter(AppLoginForm);

@@ -22,7 +22,7 @@ const columns = [{
   }
 }, {
   title: '专辑',
-  width: 100,
+  width: 130,
   render: song => {
     const {album} = song;
     return AlbumStore.getAlbumLink(album);

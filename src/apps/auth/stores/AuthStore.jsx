@@ -32,7 +32,7 @@ class AuthStore {
 
   @action login = (username, password) => {
     this.loading = true;
-    FetchProvider.post('/api/account/login/', {
+    return FetchProvider.post('/api/account/login/', {
       username, password
     }).then(res => {
       this.profile = res.data;
@@ -46,8 +46,9 @@ class AuthStore {
   };
 
   @action logout = () => {
-    FetchProvider.post('/api/account/logout/')
+    return FetchProvider.post('/api/account/logout/')
       .then(res => {
+        this.auth = false;
         this.profile = defaultProfile;
         message.success('再见');
       });

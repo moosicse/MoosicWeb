@@ -1,42 +1,20 @@
 import React from 'react';
 import {observable, action} from 'mobx';
-import * as faceapi from 'face-api.js';
-
-const MODEL_URL = '/models';
+import FetchProvider from '../../../shared/RequestProvider';
+import MusicPlayerStore from '../../home/stores/MusicPlayerStore';
 
 class MotionDetectStore {
+  @observable loading = false;
 
-  async loadModels () {
-    await faceapi.loadTinyFaceDetectorModel(MODEL_URL);
-    await faceapi.loadFaceLandmarkTinyModel(MODEL_URL);
-    await faceapi.loadFaceRecognitionModel(MODEL_URL);
-  }
-
-  @observable webcam = null;
-
-  @action recognitionMotion = () => {
-    if (this.webcam) {
-      const imageSrc = this.webcam.getScreenshot();
-      console.log("Take Picture");
-      console.log(imageSrc);
-      const imgTag = document.createElement('img');
-      imgTag.src = imageSrc;
-
-      let scoreThreshold = 0.5;
-      let inputSize = 512;
-      const OPTION = new faceapi.TinyFaceDetectorOptions({
-        inputSize,
-        scoreThreshold
+  @action getMotionList = (motion) => {
+    this.loading = true;
+    return FetchProvider.get(`/api/playlist/motion/?motion=${motion}`)
+      .then(res => {
+        if (res.data.length > 0)
+          MusicPlayerStore.loadPlaylist(res.data);
+        this.loading = false;
       });
-      const useTinyModel = true;
-
-      const detectionsWithExpressions = faceapi.detectAllFaces(imgTag, OPTION).withFaceExpressions();
-      detectionsWithExpressions
-        .then(res => {
-          console.log(res);
-        })
-    }
-  };
+  }
 }
 
 export default new MotionDetectStore();
